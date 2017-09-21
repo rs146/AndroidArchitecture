@@ -22,10 +22,6 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (InjectHelper.appComponent == null) {
-            Log.d("MainAct", "its null")
-        }
-
         DaggerMainActivityComponent.builder()
                 .appComponent(InjectHelper.appComponent)
                 .mainActivityModule(MainActivityModule(this))
