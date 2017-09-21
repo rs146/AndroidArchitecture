@@ -1,6 +1,7 @@
 package uk.co.mycompany.di
 
 import android.app.Application
+import android.arch.persistence.room.Room
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -15,6 +16,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import uk.co.mycompany.api.ApiService
+import uk.co.mycompany.persistence.PeoplesDatabase
+import uk.co.mycompany.persistence.dao.PeopleDao
 import uk.co.mycompany.util.SchedulerProvider
 import java.io.File
 import java.util.*
@@ -69,4 +72,13 @@ class AppModule(private val application: Application) {
     @Provides
     @Singleton
     fun provideSchedulerProvider() = SchedulerProvider(Schedulers.io(), AndroidSchedulers.mainThread())
+
+    @Provides
+    @Singleton
+    fun providePeoplesDatabase(application: Application): PeoplesDatabase =
+            Room.databaseBuilder(application, PeoplesDatabase::class.java, "peoples.db").build()
+
+    @Provides
+    @Singleton
+    fun providePeopleDao(peoplesDatabase: PeoplesDatabase): PeopleDao = peoplesDatabase.peopleDao()
 }

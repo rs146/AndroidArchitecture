@@ -1,0 +1,57 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "eff5f69b200dab67930b72143e6e3045",
+    "entities": [
+      {
+        "tableName": "Person",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`personId` TEXT NOT NULL, `firstName` TEXT NOT NULL, `surname` TEXT NOT NULL, `age` INTEGER NOT NULL, `numberOfHobbies` INTEGER NOT NULL, PRIMARY KEY(`personId`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "personId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firstName",
+            "columnName": "firstName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "surname",
+            "columnName": "surname",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "age",
+            "columnName": "age",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "numberOfHobbies",
+            "columnName": "numberOfHobbies",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "personId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"eff5f69b200dab67930b72143e6e3045\")"
+    ]
+  }
+}

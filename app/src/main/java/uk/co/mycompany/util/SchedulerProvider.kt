@@ -1,9 +1,6 @@
 package uk.co.mycompany.util
 
-import io.reactivex.Completable
-import io.reactivex.Observable
-import io.reactivex.Scheduler
-import io.reactivex.Single
+import io.reactivex.*
 
 class SchedulerProvider constructor(val backgroundScheduler: Scheduler, val foregroundScheduler: Scheduler) {
 
@@ -24,6 +21,13 @@ class SchedulerProvider constructor(val backgroundScheduler: Scheduler, val fore
     fun getSchedulersForCompletable(): (Completable) -> Completable {
         return { completable: Completable ->
             completable.subscribeOn(backgroundScheduler)
+                    .observeOn(foregroundScheduler)
+        }
+    }
+
+    fun <T> getSchedulersForFlowable(): (Flowable<T>) -> Flowable<T> {
+        return { flowable: Flowable<T> ->
+            flowable.subscribeOn(backgroundScheduler)
                     .observeOn(foregroundScheduler)
         }
     }

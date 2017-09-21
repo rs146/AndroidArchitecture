@@ -31,11 +31,22 @@ class MainActivity: AppCompatActivity() {
                 .mainActivityModule(MainActivityModule(this))
                 .build().inject(this)
 
-        button.setOnClickListener({ _ ->
+        insertButton.setOnClickListener({ _ ->
             compositeDisposable.add(mainViewModel.showDataFromApiAndUser()
                     .subscribeBy(
                             onSuccess = {
                                 textView.text = "${it.ipAddress.ip} and ${it.person.firstName} ${it.person.surname}"
+                            },
+                            onError = {
+                                Log.d("MainActivity", it.message)
+                            }))
+        })
+
+        showButton.setOnClickListener({ _ ->
+            compositeDisposable.add(mainViewModel.showPeopleFromDb()
+                    .subscribeBy(
+                            onNext = {
+                                textView.text = "${it[0].id} and ${it[0].firstName} ${it[0].surname}"
                             },
                             onError = {
                                 Log.d("MainActivity", it.message)

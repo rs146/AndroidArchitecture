@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AndroidArchitecture</string>
     <string name="press_me">Press ME!</string>
+    <string name="showDb">Show DB</string>
 </resources>
