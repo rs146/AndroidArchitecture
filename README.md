@@ -11,3 +11,4 @@ Layers of the app:
  * ViewModel - interacts with Repositories. It also gives data to the view where the view can subscribe to that data.
  * UI - the actual Android UI components.
  
+[![Build Status](https://travis-ci.org/rs146/AndroidArchitecture.svg?branch=master)](https://travis-ci.org/rs146/AndroidArchitecture)
